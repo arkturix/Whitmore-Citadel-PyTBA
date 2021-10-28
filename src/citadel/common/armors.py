@@ -1,6 +1,7 @@
 """Common class for all armor"""
 import random
 
+
 class Armor:
 
     def __init__(self, name: str, level: int = 1, armor_class: int = 1):
