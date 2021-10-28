@@ -1,36 +1,49 @@
 """Inventory class"""
 from citadel.common import weapons, armors
-from src.citadel.common.armors import Armor
-from src.citadel.common.weapons import Weapon
+from citadel.common.exceptions import UnequippableItem
+
 
 class Inventory:
 
     def __init__(self):
         starting_armor = armors.Cloth()
-        starting_weapon = weapons.Weapon()  # TODO: Finish weapons class
-        self.contents = [starting_armor]
+        starting_weapon = weapons.ShortSword()
+        # Contents is a dict with keys as items
+        self.contents = {starting_armor: 1, starting_weapon: 1}
         self.equipped = {
             'Armor': starting_armor,
             'Weapon': starting_weapon
         }
 
     def __add__(self, item):
-        self.contents.append(item)
+        """Add item to inventory"""
+        if self._inventory_contains(item):
+            self.contents[item] += 1
+        else:
+            self.contents[item] = 1
 
     def __sub__(self, item):
-        if item in self.contents:
-            self.contents.pop(item)
+        """Remove item from inventory"""
+        if self._inventory_contains(item):
+            if self.contents[item] > 1:
+                self.contents[item] -= 1
+            else:
+                del self.contents[item]
         else:
             pass  # TODO: Figure out what to do with trying to remove items that aren't in inventory
 
+    def _inventory_contains(self, item: object) -> bool:
+        """Test if item is in inventory already"""
+        return item in self.contents.keys()
+
     def equip_item(self, item):
-        if item in self.contents:
-            if type(item) is Armor:
+        if item in [i['item'] for i in self.contents]:
+            if type(item) is armors.Armor:
                 self.equipped['Armor'] = item
-            elif type(item) is Weapon:
+            elif type(item) is weapons.Weapon:
                 self.equipped['Weapon'] = item
             else:
-                pass  # TODO: Handle attempt to equip item that is not equippable
+                raise UnequippableItem(item=item)
         else:
             pass  # TODO: Handle attempt to equip item that is not in inventory
 
