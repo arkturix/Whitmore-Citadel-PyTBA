@@ -9,6 +9,12 @@ class Weapon:
         self.level = level
         self.attack_power = attack_power
 
+    def __hash__(self) -> int:
+        return hash((self.name, self.level))
+
+    def __eq__(self, other: object) -> bool:
+        return (self.name, self.level) == (other.name, other.level)
+
     def __str__(self):
         return self.name
 

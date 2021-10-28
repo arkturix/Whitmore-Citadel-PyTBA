@@ -9,6 +9,12 @@ class Armor:
         self.level = level
         self.armor_class = armor_class
 
+    def __hash__(self) -> int:
+        return hash((self.name, self.level))
+
+    def __eq__(self, other: object) -> bool:
+        return (self.name, self.level) == (other.name, other.level)
+
     def __str__(self):
         return self.name
 
