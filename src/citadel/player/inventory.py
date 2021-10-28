@@ -1,5 +1,5 @@
 """Inventory class"""
-from citadel.common import weapons, armors
+from citadel.common import weapons, armors, potions
 from citadel.common.exceptions import ItemNotInInventory, UnequippableItem
 
 
@@ -8,8 +8,9 @@ class Inventory:
     def __init__(self):
         starting_armor = armors.Cloth()
         starting_weapon = weapons.ShortSword()
+        starting_potion = potions.Healing()
         # Contents is a dict with keys as items
-        self.contents = {starting_armor: 1, starting_weapon: 1}
+        self.contents = {starting_armor: 1, starting_weapon: 1, starting_potion: 3}
         self.equipped = {
             'Armor': starting_armor,
             'Weapon': starting_weapon
@@ -37,13 +38,14 @@ class Inventory:
         return item in self.contents.keys()
 
     def equip_item(self, item):
+        """Equip weapons or armor"""
         if item in [i['item'] for i in self.contents]:
             if type(item) is armors.Armor:
                 self.equipped['Armor'] = item
             elif type(item) is weapons.Weapon:
                 self.equipped['Weapon'] = item
             else:
-                raise UnequippableItem(item=item)
+                raise UnequippableItem(item)
         else:
-            pass  # TODO: Handle attempt to equip item that is not in inventory
+            raise ItemNotInInventory(item)
 
