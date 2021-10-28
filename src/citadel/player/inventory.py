@@ -1,6 +1,6 @@
 """Inventory class"""
 from citadel.common import weapons, armors
-from citadel.common.exceptions import UnequippableItem
+from citadel.common.exceptions import ItemNotInInventory, UnequippableItem
 
 
 class Inventory:
@@ -30,7 +30,7 @@ class Inventory:
             else:
                 del self.contents[item]
         else:
-            pass  # TODO: Figure out what to do with trying to remove items that aren't in inventory
+            raise ItemNotInInventory(item)
 
     def _inventory_contains(self, item: object) -> bool:
         """Test if item is in inventory already"""
