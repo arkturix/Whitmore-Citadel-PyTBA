@@ -12,20 +12,3 @@ class Area:
 
     def __add__(self, add_desc):
         self.description += "\n" + add_desc
-
-    def search(self):
-        pass
-    
-    class Travel:
-
-        def north(self):
-            pass
-        
-        def east(self):
-            pass
-
-        def south(self):
-            pass
-
-        def west(self):
-            pass
