@@ -5,9 +5,15 @@ class Treasure:
     def __init__(self, name: str, contents: list = []):
         self.name = name
         self.contents = contents
+        if not self.contents:
+            self._get_contents()
 
     def __str__(self):
         return self.name
+
+    def _get_contents(self):
+        """Generate the contents of the treasure"""
+        pass
 
     def open(self):
         """Open the treasure container"""
