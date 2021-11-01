@@ -15,6 +15,10 @@ class Treasure:
         """Generate the contents of the treasure"""
         pass
 
+    def describe(self):
+        """Describe the contents of the treasure"""
+        pass
+
     def open(self):
         """Open the treasure container"""
         return self.contents

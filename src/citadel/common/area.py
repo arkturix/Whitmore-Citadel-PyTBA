@@ -19,6 +19,12 @@ class Area:
     def __add__(self, add_desc):
         self.description += "\n" + add_desc
 
+    def search(self):
+        """Search the area"""
+        # TODO: Create hidden paths attributes
+        self.treasure['hidden'] = False
+        return self.treasure.describe()
+
     def _monsters_appear(self):
         """Determine if monsters appear on entering area"""
         pass

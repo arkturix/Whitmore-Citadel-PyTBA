@@ -1,5 +1,6 @@
 """Player class"""
 from .inventory import Inventory
+from citadel.forest import StartingArea
 
 
 class Player:
@@ -9,6 +10,7 @@ class Player:
         self.hp = 10
         self.max_hp = 10
         self.backpack = Inventory()
+        self.current_area = StartingArea()
 
     def __add__(self, amount: int):
         """Add to players hit points"""
@@ -34,7 +36,7 @@ class Player:
 
     def search_area(self):
         """Search the area for treasure and paths"""
-        pass
+        self.current_area.search()
 
     def equip(self, item):
         """Equip armor or weapon from inventory"""
