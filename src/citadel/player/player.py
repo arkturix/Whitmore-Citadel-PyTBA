@@ -1,6 +1,7 @@
 """Player class"""
 from .inventory import Inventory
 from citadel.forest import StartingArea
+from citadel.common.exceptions import UnequippableItem
 
 
 class Player:
@@ -40,7 +41,10 @@ class Player:
 
     def equip(self, item):
         """Equip armor or weapon from inventory"""
-        pass
+        try:
+            self.backpack.equip_item(item)
+        except UnequippableItem as e:
+            print(e.message)  # TODO: Handle this error better
 
     def attack(self, monster):
         """Attack a monster"""
